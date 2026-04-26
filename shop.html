@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Title-->
+    <title>Radiance by Neelo</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/log.png">
+    <!--import font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!--==fontawesome for icons==-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--------SWEIPER-SLIDER-CSS---------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+    <style>
+        .cart {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 360px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 65px 20px 40px;
+            z-index: 100;
+            overflow: auto;
+            transition: 0.5s;
+        }
+
+        .cart.active {
+            right: 0;
+        }
+
+
+
+        .cart-title {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .cart-box {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .cart-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 20p;
+        }
+
+        .cart-details {
+            display: grid;
+            gap: 8px;
+            margin-right: auto;
+        }
+
+        .cart-product-title {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .cart-price {
+            font-weight: 500;
+        }
+
+        .cart-quantity {
+            display: flex;
+            width: 100px;
+            border: 1px solid #999;
+            border-radius: 6px;
+        }
+
+        .cart-quantity button {
+            background: transparent;
+            width: 30px;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart-quantity #decrement {
+            color: #999;
+        }
+
+        .cart-quantity .number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            border-left: 1px solid #999;
+            border-right: 1px solid #999;
+            cursor: default;
+        }
+
+        .cart-remove {
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .total {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .total-Price {
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .btn-buy {
+            display: block;
+            padding: 10px 30px;
+            background: #ecd394;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #fff;
+            margin: 20px auto 0;
+            cursor: pointer;
+        }
+
+        #cart-close {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <header id="header">
+        <!--top bar-->
+        <div class="header-top-bar">
+            <span>Welcome To Radiance by Neelo</span>
+        </div>
+        <!--===Navigation=====-->
+        <nav class="navigation">
+            <!--**logo**-->
+            <a href="#" class="logo">
+                <img src="images/Radiance by Neelo.png" alt="Logo">
+            </a>
+            <!--**meun**-->
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="About Us.html">About us</a></li>
+                <li><a href="Testemonials.html">Testimonials</a></li>
+                <li><a href="Contact us.html">Contact Us</a></li>
+            </ul>
+            <!--right Nav-->
+            <div class="right-nav">
+                <a href="#" class="nav-search">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="nav-User">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" id="nav-Cart">
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                    <span class="cart-items-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!---shopping-Cartpanel-->
+    <div class="cart">
+        <h2 class="cart-title">Your Cart</h2>
+        <div class="cart-content">
+            <!---<div class="cart-box">
+                <img src="images/product-1.webp" class="cart-img">
+                <div class="cart-details">
+                    <h2 class="cart-product-title">Blue ring</h2>
+                    <span class="cart-price">P20.00</span>
+                    <div class="cart-quantity">
+                        <button id="decrement">-</button>
+                        <span class="number">1</span>
+                        <button id="increment">+</button>
+                    </div>
+                </div>
+                <i class="fa-solid fa-trash cart-remove"></i>
+            </div>--->
+        </div>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-Price">P0</div>
+        </div>
+        <button class="btn-buy">Buy Now</button>
+        <i class="fa-solid fa-xmark" id="cart-close"></i>
+    </div>
+
+
+    <!--==Feature-Product==========-->
+    <section id="new_product">
+        <!----heading------>
+        <div class="new-product-heading">
+            <h2>Earrings Collection</h2>
+            <p>Featured products</p>
+        </div>
+
+        <div class="feature-product-container">
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/13.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                        Add to Cart
+                    </button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Blue ring</a>
+                    <span class="price">P200.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/1.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Diamons Earrings</a>
+                    <span class="price">P50.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/6.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Butterfly Earrings</a>
+                    <span class="price">P30.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/5.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P800.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/2.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P50.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/7.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P100.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/12.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P200.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/15.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P90.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/8.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P15.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/earring/6.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P60.00</span>
+                </div>
+            </div><!--box_end-->
+        </div>
+    </section>
+
+
+    <!--==Feature-Product==========-->
+    <section id="new_product">
+        <!----heading------>
+        <div class="new-product-heading">
+            <h2>Ring Collection</h2>
+            <p> Featured products</p>
+        </div>
+
+        <div class="feature-product-container">
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/8.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                        Add to Cart
+                    </button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Blue ring</a>
+                    <span class="price">P2000.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/9.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Diamons Earrings</a>
+                    <span class="price">P2500.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/1.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Butterfly Earrings</a>
+                    <span class="price">P3000.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/7.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P2500.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/product-14.webp" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P1500.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/2.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P3500.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/rings/6.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P3000.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/product-3.webp" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P1000.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/product-1.webp" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P2000.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/product-2.webp" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P2000.00</span>
+                </div>
+            </div><!--box_end-->
+        </div>
+    </section>
+
+    
+    <!--==Feature-Product==========-->
+    <section id="new_product">
+        <!----heading------>
+        <div class="new-product-heading">
+            <h2>Necklace Collection</h2>
+            <p>Featured products</p>
+        </div>
+
+        <div class="feature-product-container">
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/1.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                        Add to Cart
+                    </button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Blue ring</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/2.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Diamons Earrings</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/8.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Butterfly Earrings</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/5.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/4.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/9.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/7.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/11.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/3.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/necklace/6.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P20.00</span>
+                </div>
+            </div><!--box_end-->
+        </div>
+    </section>
+
+    
+    <!--==Feature-Product==========-->
+    <section id="new_product">
+        <!----heading------>
+        <div class="new-product-heading">
+            <h2>Bracelet Collection</h2>
+            <p>Featured products</p>
+        </div>
+
+        <div class="feature-product-container">
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/1.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                        Add to Cart
+                    </button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Blue ring</a>
+                    <span class="price">P150.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/7.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Diamons Earrings</a>
+                    <span class="price">P170.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/8.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Butterfly Earrings</a>
+                    <span class="price">P160.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/9.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P150.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/2.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P100.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/3.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P100.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/4.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down"></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P100.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/5.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P150.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/6.jpg" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P150.00</span>
+                </div>
+            </div><!--box_end-->
+
+            <div class="new-product-box">
+                <!--image-->
+                <a href="#" class="new-product-img">
+                    <img src="images/bracelets/10.jfif" alt="Product">
+                    <span>New</span>
+                    <button class="new-product-cart-btn add-cart"><i class="fa-solid fa-cart-arrow-down "></i>Add to
+                        Cart</button>
+                </a>
+                <!------text------->
+                <div class="new-product-text">
+                    <a href="#" class="new-product-title">Rings for Women</a>
+                    <span class="price">P97.00</span>
+                </div>
+            </div><!--box_end-->
+        </div>
+    </section>
+
+
+
+    <script src="script.js"></script>
+
+   <!--footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-items">
+                <div class="footer-item footer-logo">
+                    <img src="images/Radiance by Neelo.png" alt="">
+                    <div class="social">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-x"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-item">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                        <li><a href="Testemonials.html">Testemonials</a></li>
+                        <li><a href="Contact us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-item footer-contact">
+                    <h3>Get in touch</h3>
+                    <div class="item">
+                        <span>Location:</span>
+                        <p>Block 5 Plot 41103</p>
+                    </div>
+                    <div class="item">
+                        <span> Call us:</span>
+                        <p>+267 75915081</p>
+                    </div>
+                    <div class="item">
+                        <span>Write Us:</span>
+                        <p>wamaradu@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="footer-item footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p> Subscribe to our Newsletter to get latest updates and news</p>
+                    <form class="form">
+                        <input type="text" placeholder="Email">
+                        <button type="button" class="btn">Subscribe Now</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; Copyright 2026. All Rights Reserved</p>   
+                <P>Tshenolo Wamaradu</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
