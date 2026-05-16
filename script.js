@@ -93,7 +93,7 @@ const updateTotalPrice = () => {
         const quantity = quantityElement.textContent;
         total += price * quantity;
     })
-    totalPriceElement.textContent = `$${total}`;
+    totalPriceElement.textContent = `P${total}`;
 };
 
 let cartItemsCount = 0;
@@ -117,12 +117,5 @@ buynowbutton.addEventListener("click", () => {
         return;
     }
 
-    cartBoxes.forEach(cartBox => cartBox.remove());
-
-    cartItemsCount = 0;
-    updateCartCount(0);
-
-    updateTotalPrice();
-
-    alert("Thank you for your purchase");
+    window.location.href = "checkout.html";
 });
