@@ -51,6 +51,46 @@
         width: 120px;
         object-fit: cover;
     }
+   
+@media(max-width: 900px) {
+    .team-member-card {
+        text-align: center;
+    }
+
+    .team-member-card img {
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+
+    .row.g-4.text-center {
+        justify-content: center;
+    }
+}
+@media(max-width: 900px) {
+
+    .section-card .row.align-items-center,
+    .section-card .row.align-items-center.flex-md-row-reverse {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-card .col-md-5,
+    .section-card .col-md-7 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .section-card .col-md-5 {
+        margin-bottom: 20px;
+    }
+
+    .section-card .col-md-5 img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
 </style>
 
 <body>

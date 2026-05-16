@@ -283,15 +283,35 @@
             }
         }
 
+       
+
         @media(max-width: 900px) {
-            .container .row {
-                flex-wrap: wrap;
+            .container1 {
+                padding: 40px 5%;
+                align-items: flex-start;
+            }
+
+            .container1 .row {
+                width: 100%;
+                flex-direction: column;
             }
 
             .row section.left,
             .row section.right {
                 flex-basis: 100%;
-                margin: 0px;
+                width: 100%;
+                min-width: 0;
+                margin-right: 0;
+            }
+
+            .messageForm .halfwidth,
+            .messageForm .fullwidth {
+                flex-basis: 100%;
+            }
+
+            .messageForm input,
+            .messageForm textarea {
+                width: 100%;
             }
         }
     </style>
@@ -430,7 +450,7 @@
                         </div>
 
                         <div class="inputgroup fullwidth">
-                            <button>Send Massage</button>
+                            <button>Send Message</button>
                         </div>
 
                     </form>
