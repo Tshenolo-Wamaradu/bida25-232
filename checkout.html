@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Title-->
+    <title>Radiance by Neelo</title>
+    <!--CSS-->
+    <link rel="shortcut icon" href="images/log.png">
+    <!--import font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!---google-fonts-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!--==fontawesome for icons==-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: whitesmoke;
+            padding: 25px;
+        }
+
+        .container form {
+            width: 700px;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        form .row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .row .column {
+            flex: 1 1 250px;
+        }
+
+        .column .title {
+            font-size: 20px;
+            color: #333;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .column .input-box {
+            margin: 15px 0;
+        }
+
+        .input-box span {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .column .flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .flex .input-box {
+            margin-top: 5px;
+        }
+
+
+        .input-box img {
+            height: 33px;
+            margin-top: 5px;
+            filter: drop-shadow(0 0 1px #000);
+        }
+
+        form .btn {
+            width: 100%;
+            padding: 12px;
+            background: #818181;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            font-size: 17px;
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        form .btn.btn:hover {
+            background: #ecd394;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div class="row">
+                <div class="column">
+                    <h3 class="title">Billing Address</h3>
+                    <div class="input-box">
+                        <span> Full name:</span>
+                        <input type="text" placeholder="Tshenolo" required="required ">
+                    </div>
+                    <div class="input-box">
+                        <span> Email:</span>
+                        <input type="email" placeholder="example@gmail.com" required="required">
+                    </div>
+                    <div class="input-box">
+                        <span> Address:</span>
+                        <input type="text" placeholder="Street - Plot - Location" required="required">
+                    </div>
+                    <div class="input-box">
+                        <span> City:</span>
+                        <input type="text" placeholder="Gaborone" required="required">
+                    </div>
+                    <div class="flex">
+                        <div class="input-box">
+                            <span> District:</span>
+                            <input type="text" placeholder="Central" required="required">
+                        </div>
+                        <div class="input-box">
+                            <span> PO BOX:</span>
+                            <input type="number" placeholder="123" required="required">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="column">
+                    <h3 class="title">Payment</h3>
+                    <div class="input-box">
+                        <span> Card Accepted :</span>
+                        <img src="images/imgcards.png" alt="">
+                    </div>
+                    <div class="input-box">
+                        <span> Name On Card:</span>
+                        <input type="text" placeholder="Tshenolo" required="required">
+                    </div>
+                    <div class="input-box">
+                        <span> Card Number:</span>
+                        <input type="number" placeholder="4232 3442 2353 3233" required="required">
+                    </div>
+                    <div class="input-box">
+                        <span> Exp. Month:</span>
+                        <input type="text" placeholder="July" required="required">
+                    </div>
+                    <div class="flex">
+                        <div class="input-box">
+                            <span> Exp Year:</span>
+                            <input type="number" placeholder="2025" required="required">
+                        </div>
+                        <div class="input-box">
+                            <span> CVC:</span>
+                            <input type="number" placeholder="123" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn">Place Order</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            alert("Thank you for your order! Your purchase has been successfully placed.");
+
+            window.location.href = "index.html";
+        });
+    </script>
+
+
+
+</body>
+
+</html>
