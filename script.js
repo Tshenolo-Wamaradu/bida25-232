@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 const CartIcon = document.querySelector("#nav-Cart")
 const Cart = document.querySelector(".cart")
 const CartClose = document.querySelector("#cart-close")
@@ -240,4 +240,5 @@ buynowbutton.addEventListener("click", () => {
     }
 
     window.location.href = "checkout.html";
+>>>>>>> 07a5daf4fc14ab6d3d8f9a8c3249d476b5e76a79
 });
