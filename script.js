@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const CartIcon = document.querySelector("#nav-Cart")
 const Cart = document.querySelector(".cart")
 const CartClose = document.querySelector("#cart-close")
