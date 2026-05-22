@@ -240,5 +240,4 @@ buynowbutton.addEventListener("click", () => {
     }
 
     window.location.href = "checkout.html";
->>>>>>> 07a5daf4fc14ab6d3d8f9a8c3249d476b5e76a79
 });
